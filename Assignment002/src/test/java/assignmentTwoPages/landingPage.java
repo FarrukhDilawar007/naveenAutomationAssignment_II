@@ -1,7 +1,9 @@
 package assignmentTwoPages;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-
+import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -57,9 +59,14 @@ public class landingPage {
 	public void setUpDates() {
 		
 		returnDate.click();
-		System.out.println(date.getDayOfMonth());
-		int returnDate = date.getDayOfMonth() + 7;
-		//System.out.println("Return Date: " + returnDate +"/" + date.getMonthValue() +"/" + date.getYear()+"");		
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd");
+		//get current date of the month with Date()
+		Date date = new Date();
+		// Now format the date
+		String currentdate= dateFormat.format(date);
+		int returnDate = Integer.parseInt(currentdate) + 7;
+		
 		By selectReturnDate = By.xpath("//div[@class = 'dateInnerCell']//p[contains(text(),'"+ returnDate +"')]");
 		localdriver.findElement(selectReturnDate).click();;
 		

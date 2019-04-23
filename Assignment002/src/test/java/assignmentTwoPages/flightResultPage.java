@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class flightResultPage {
 
@@ -78,6 +79,34 @@ public class flightResultPage {
 		System.out.println("Number of Return Flights:" + returnFlights.size());
 		
 		resetFilters.click();
+	}
+	
+	
+	public void planTrip(int depatureFlightIndex, int returnFlightIndex) {
+		
+		WebElement DepatureFlight = localdriver.findElement(By.xpath("(//div[@id = 'ow_domrt-jrny']//p[@class = 'actual-price'])["
+		+depatureFlightIndex+"]"));
+		//fli-list-body-section clearfix
+		WebElement ReturnFlight = localdriver.findElement(By.xpath("(//div[@id = 'rt-domrt-jrny']//p[@class = 'actual-price'])["
+				+returnFlightIndex+"]"));
+		
+		DepatureFlight.click();
+		int depatureFlightFare = Integer.parseInt(DepatureFlight.getText().substring(3).replace(",", ""));
+		ReturnFlight.click();
+		int returnFlightFare = Integer.parseInt(ReturnFlight.getText().substring(3).replace(",", ""));
+		
+		System.out.println("Departure Flight: " + depatureFlightFare);
+		System.out.println("Return Flight: " + returnFlightFare);
+		
+		System.out.println("Footer Prices >> ");
+		
+		System.out.println("Footer Depature Flight Fare: " +FooterDeptPrice.getText());
+		System.out.println("Footer Return Flight Fare: " + FooterRetPrice.getText());
+		System.out.println("Footer Total Fare: " + flightTotalPrice.getText());
+		
+		Assert.assertEquals(FooterDeptPrice.getText().substring(3).replace(",", ""), depatureFlightFare);
+		Assert.assertEquals(FooterRetPrice.getText().substring(3).replace(",", ""), returnFlightFare);
+		Assert.assertEquals(Integer.parseInt(flightTotalPrice.getText().substring(3).replace(",", "")), returnFlightFare + depatureFlightFare);
 	}
 
 	public void doScrolling() {

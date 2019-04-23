@@ -6,9 +6,8 @@
       <class name="assignmentTwoTests.TC_001">
         <methods>
           <include name="tearDownTest"/>
-          <include name="SearchFlights"/>
+          <include name="verifyFlightDetails"/>
           <include name="setUpTest"/>
-          <include name="SearchResults"/>
         </methods>
       </class> <!-- assignmentTwoTests.TC_001 -->
     </classes>
