@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<parameter name="dept" value="3" />
+<parameter name="ret" value="1" />
+<parameter name="dept" value="4" />
+<parameter name="ret" value="6" />
+
+<test name="verifyFlightDetails">
+
+    <classes>
+      <class name="assignmentTwoTests.TC_001"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
