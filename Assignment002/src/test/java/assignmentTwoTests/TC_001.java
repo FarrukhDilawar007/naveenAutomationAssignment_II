@@ -33,7 +33,7 @@ public class TC_001 {
 		//driver.get("https://www.makemytrip.com/");
 		driver.get("https://www.makemytrip.com/flight/search?tripType=R&itinerary=DEL-BLR-26/04/2019_BLR-DEL-01/05/2019&paxType=A-1_C-0_I-0&cabinClass=E&sTime=1556110356664&forwardFlowRequired=true&pot=undefined&cmp=undefined&intl=undefined");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+		//https://stackoverflow.com/questions/11908249/debugging-element-is-not-clickable-at-point-error
 		
 	}
 	//@Test
