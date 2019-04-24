@@ -22,7 +22,6 @@ import utils.dataProvider;
 public class TC_001 {
 
 	static WebDriver driver;
-	static LocalDate date;
 	
 	
 	@BeforeTest
@@ -32,7 +31,7 @@ public class TC_001 {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		//driver.get("https://www.makemytrip.com/");
-		driver.get("https://www.makemytrip.com/flight/search?itinerary=DEL-BLR-24/04/2019_BLR-DEL-30/04/2019&tripType=R&paxType=A-1_C-0_I-0&intl=false&=&cabinClass=E");
+		driver.get("https://www.makemytrip.com/flight/search?tripType=R&itinerary=DEL-BLR-26/04/2019_BLR-DEL-01/05/2019&paxType=A-1_C-0_I-0&cabinClass=E&sTime=1556110356664&forwardFlowRequired=true&pot=undefined&cmp=undefined&intl=undefined");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		
@@ -61,6 +60,7 @@ public class TC_001 {
 		flightResultPage resultPage = PageFactory.initElements(driver, flightResultPage.class);
 		resultPage.planTrip(p1, p2);
 		
+		
 	}
 	
 	@AfterTest
@@ -80,8 +80,8 @@ public class TC_001 {
 		param[0][0] = 4;
 		param[0][1] = 7;
 		
-		param[1][0] = 4;
-		param[1][1] = 7;
+		param[1][0] = 3;
+		param[1][1] = 8;
 		
 		param[2][0] = 5;
 		param[2][1] = 8;

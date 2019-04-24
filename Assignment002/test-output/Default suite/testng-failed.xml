@@ -6,7 +6,7 @@
       <class name="assignmentTwoTests.TC_001">
         <methods>
           <include name="tearDownTest"/>
-          <include name="verifyFlightDetails"/>
+          <include name="verifyFlightDetails" invocation-numbers="0 1 2 3"/>
           <include name="setUpTest"/>
         </methods>
       </class> <!-- assignmentTwoTests.TC_001 -->

@@ -83,20 +83,23 @@ public class flightResultPage {
 	}
 	
 	
-	public void planTrip(int depatureFlightIndex, int returnFlightIndex) {
+	public void planTrip(int depatureFlightIndex, int returnFlightIndex) throws InterruptedException {
 		
-//		WebElement DepatureFlight = localdriver.findElement(By.xpath("(//div[@id = 'ow_domrt-jrny']//span[@class = 'splitVw-outer append_right9'])["
-//				+depatureFlightIndex+"]"));
-//				
-//		WebElement ReturnFlight = localdriver.findElement(By.xpath("(//div[@id = 'rt-domrt-jrny']//span[@class = 'splitVw-outer append_right9'])["
-//				+returnFlightIndex+"]"));
+		doScrolling();
+		WebElement DepatureFlight = localdriver.findElement(By.xpath("//body/div[@id='root']/div/div[@id='root-element']/div[@id='body--wraper']/div[@id='section--wrapper']/div[@id='left-side--wrapper']/div[@class='fli-intl-lhs pull-left']"
+				+ "/div[@class='splitVw clearfix']/div[@id='rt-domrt-jrny']/div[2]/div["+depatureFlightIndex+"]"));
+				
+		WebElement ReturnFlight = localdriver.findElement(By.xpath("//body/div[@id='root']/div/div[@id='root-element']/div[@id='body--wraper']/div[@id='section--wrapper']/div[@id='left-side--wrapper']/div[@class='fli-intl-lhs pull-left']"
+				+ "/div[@class='splitVw clearfix']/div[@id='ow_domrt-jrny']/div[2]/div["+returnFlightIndex+"]"));
+		
+//		System.out.println(depatureFlightIndex);
+//		System.out.println(returnFlightIndex);
 //		
-		System.out.println(depatureFlightIndex);
-		System.out.println(returnFlightIndex);
+//		departureFlights.get(depatureFlightIndex).click();
+//
+//		returnFlights.get(returnFlightIndex).click();
+//		
 		
-		departureFlights.get(depatureFlightIndex).click();
-
-		returnFlights.get(returnFlightIndex).click();
 		
 		WebElement DepatureFlightFare = localdriver.findElement(By.xpath("(//div[@id = 'ow_domrt-jrny']//p[@class = 'actual-price'])["
 		+depatureFlightIndex+"]"));
@@ -104,16 +107,16 @@ public class flightResultPage {
 		WebElement ReturnFlightFare = localdriver.findElement(By.xpath("(//div[@id = 'rt-domrt-jrny']//p[@class = 'actual-price'])["
 				+returnFlightIndex+"]"));
 		
-		//DepatureFlight.click();
+		System.out.println("departure clicked: " +depatureFlightIndex);
+		DepatureFlight.click();
+		System.out.println("Return clicked: " +returnFlightIndex);
+		ReturnFlight.click();
 		
 		int depatureFlightFare = Integer.parseInt(DepatureFlightFare.getText().substring(3).replace(",", ""));
-		
-		//ReturnFlight.click();
-		
 		int returnFlightFare = Integer.parseInt(ReturnFlightFare.getText().substring(3).replace(",", ""));
 		
-		System.out.println("Departure Flight: " + depatureFlightFare);
-		System.out.println("Return Flight: " + returnFlightFare);
+		System.out.println("Departure Flight: " + DepatureFlightFare);
+		System.out.println("Return Flight: " + ReturnFlightFare);
 		
 		System.out.println("Footer Prices >> ");
 		
@@ -127,6 +130,9 @@ public class flightResultPage {
 //		Assert.assertEquals(departFare, depatureFlightFare);
 //		Assert.assertEquals(returnFare, returnFlightFare);
 //		Assert.assertEquals(totalFare, returnFlightFare + depatureFlightFare);
+		
+		
+		
 	}
 
 	public void doScrolling() {
