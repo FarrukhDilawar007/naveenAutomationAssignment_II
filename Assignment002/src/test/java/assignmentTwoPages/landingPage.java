@@ -28,7 +28,7 @@ public class landingPage {
 	
 	
 	//Return Date Element
-	@FindBy(how = How.XPATH, using = "//div[@class = 'fsw_inputBox dates reDates inactiveWidget  ']//span[@class = 'lbl_input latoBold appendBottom10']")
+	@FindBy(how = How.XPATH, using = "//span[contains(text(),'RETURN')]")
 	WebElement returnDate;
 	
 	//Return Date Value > 07 Days after Departure Date

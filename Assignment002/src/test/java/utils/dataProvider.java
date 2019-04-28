@@ -10,14 +10,14 @@ public class dataProvider {
 		
 		Object[][] param = new Object[10][2];
 		
-		param[0][0] = 1;
-		param[0][1] = 5;
+		param[0][0] = 4;
+		param[0][1] = 2;
 		
-		param[1][0] = 3;
-		param[1][1] = 8;
+		param[1][0] = 4;
+		param[1][1] = 3;
 		
-		param[2][0] = 5;
-		param[2][1] = 8;
+		param[2][0] = 9;
+		param[2][1] = 7;
 		
 		param[3][0] = 6;
 		param[3][1] = 9;

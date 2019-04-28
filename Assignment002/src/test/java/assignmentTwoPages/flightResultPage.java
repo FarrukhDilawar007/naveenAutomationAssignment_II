@@ -38,7 +38,7 @@ public class flightResultPage {
 	WebElement flightTotalPrice;
 
 	// Discounted Price of the Flights
-	@FindBy(how = How.XPATH, using = "//div[@class = 'footer-fare']//p[@class='disc-applied']//span[@class='INR'][contains(text(),'Rs')]")
+	@FindBy(how = How.XPATH, using = "//div[@class = 'splitVw-footer-total make_relative make_flex alC']//*[contains(text(),'Return trip discount')]//following-sibling::span")
 	WebElement flightDiscountedPrice;
 
 	// Filter - Non Stop
@@ -61,33 +61,38 @@ public class flightResultPage {
 	}
 
 	public void flightDetails() {
-
+		
 		_helper = new helper(localdriver);
-
+		
+		//waiting for the loading of Flight results
 		wait = new WebDriverWait(localdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ow_domrt-jrny")));
 
-		System.out.println(localdriver.getTitle());
-
+		//Scrolling to the bottom of the page to fetch all the flights
 		_helper.doScrolling();
 
 		System.out.println("------ Flight Details -------");
 		System.out.println();
 		System.out.println("Number of Departure Flights:" + departureFlights.size());
 		System.out.println("Number of Return Flights:" + returnFlights.size());
+		System.out.println();
 	}
 
 	public void flightDetailswithFilters() {
-
+		
+		//Clicking on Filters
 		filterNonStopFlights.click();
 		filterOneStopFlights.click();
+		
+		//Scrolling to the bottom of the page to fetch all the flights
 		_helper.doScrolling();
-		System.out.println();
+		
 		System.out.println("------ Flight Details ( with Stop Filters ) -------");
 		System.out.println();
 		System.out.println("Number of Departure Flights:" + departureFlights.size());
 		System.out.println("Number of Return Flights:" + returnFlights.size());
-
+		
+		//resetting the filter options
 		resetFilters.click();
 	}
 
@@ -114,27 +119,44 @@ public class flightResultPage {
 		int depatureFlightFare = Integer.parseInt(DepatureFlightFare.getText().substring(3).replace(",", ""));
 		int returnFlightFare = Integer.parseInt(ReturnFlightFare.getText().substring(3).replace(",", ""));
 
+		
+		//Collecting the discounted Price if displayed with any combination of flights
+		boolean discount = false;
+		int discountedFare = 0;
+		try {
+			discount = flightDiscountedPrice.isDisplayed();
+			if ( discount == true ) {
+				discountedFare = Integer.parseInt(flightDiscountedPrice.getText().substring(3));
+			}
+			
+		} catch (Exception e) {
+			
+			e.toString();
+		}
+		
+		int footer_departFare = Integer.parseInt(FooterDeptPrice.getText().substring(3).replace(",", ""));
+		int footer_returnFare = Integer.parseInt(FooterRetPrice.getText().substring(3).replace(",", ""));
+		int footer_totalFare = Integer.parseInt(flightTotalPrice.getText().substring(3).replace(",", ""));
+		
+		
+		//Assertion of Flights Fare and Total Fare
+		Assert.assertEquals(footer_departFare, depatureFlightFare);
+		Assert.assertEquals(footer_returnFare, returnFlightFare);
+		Assert.assertEquals(footer_totalFare + discountedFare, returnFlightFare + depatureFlightFare);
+		
+		
+		System.out.println();
 		System.out.println("Flight Fares >> ");
 		System.out.println("Departure Flight: " + DepatureFlightFare.getText());
 		System.out.println("Return Flight: " + ReturnFlightFare.getText());
 		System.out.println();
-		System.out.println("Flights Fares at Bottom >> ");
-
+		
+		System.out.println("Flights Fares at Footer >> ");
 		System.out.println("Footer Depature Flight Fare: " + FooterDeptPrice.getText());
 		System.out.println("Footer Return Flight Fare: " + FooterRetPrice.getText());
 		System.out.println("Footer Total Fare: " + flightTotalPrice.getText());
+		System.out.println("Footer Discounted Fare: " + discountedFare);
 		System.out.println();
-
-		int departFare = Integer.parseInt(FooterDeptPrice.getText().substring(3).replace(",", ""));
-		int returnFare = Integer.parseInt(FooterRetPrice.getText().substring(3).replace(",", ""));
-		int totalFare = Integer.parseInt(flightTotalPrice.getText().substring(3).replace(",", ""));
-
-		
-		//Assertion of Flights Fare and Total Fare
-		Assert.assertEquals(departFare, depatureFlightFare);
-		Assert.assertEquals(returnFare, returnFlightFare);
-		Assert.assertEquals(totalFare, returnFlightFare + depatureFlightFare);
-
 	}
 
 }
